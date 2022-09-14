@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <h1 class="title maintext">{{ appName }}</h1>
+            <ul class="tabs headertab">
+                <li class="headertab" v-on:click="change('top')" v-bind:class="{'active': activeTab === 'top'}">とっぷ</li>
+                <li class="headertab" v-on:click="change('made')" v-bind:class="{'active': activeTab === 'made'}">つくったもの
+                </li>
+                <li class="headertab" v-on:click="change('something')"
+                    v-bind:class="{'active': activeTab === 'something'}">なにか</li>
+                <li class="headertab" v-on:click="change('link')" v-bind:class="{'active': activeTab === 'link'}">りんく
+                </li>
+                <li class="headertab" v-on:click="change('jam')" v-bind:class="{'active': activeTab === 'jam'}">じゃむ</li>
+            </ul>
+        </div>
+        <div class="contents">
+            <div v-if="activeTab === 'top'">
+                <div class="subtitle">
+                    <h2 class="subtitle_s">ようこそ</h2>
+                    <p class="center maintext">私のポートフォリオ兼HPのような物です。<br>諸事情で作ることになりました。</p>
+                </div>
+                <h3 class="center maintext sstitle">現在のたかかつのステータス</h3>
+                <p class="center maintext">年齢: {{ get_age() }}</p>
+                <p class="center maintext">大学: 会津大学</p>
+                <p class="center maintext">個人で作ったゲームの数: {{ get_gamenum() }}</p>
+                <p class="center maintext">その他の個人製作物の数: {{ get_toolnum() }}</p>
+                <p class="center maintext">(現在/過去)の加入団体:<br>手芸同好会<br>企画開発部 -PandD-<br>Zli<br><s>漫研</s><br><s>演劇部</s></p>
+                <p class="center maintext">
+                    過去の使用技術(言語/ソフトウェア単位):<br>Blender<br>C/C++<br>JavaScript<br>Lua<br>Python<br>Unity<br>UnrealEngine
+                </p>
+            </div>
+            <div v-if="activeTab === 'made'">
+                <div class="subtitle">
+                    <h2 class="subtitle_s">創作物</h2>
+                    <p class="center maintext">基本的に個人製作の物をこちらに配置しております。</p>
+                </div>
+                <div class="tabfolder">
+                    <ul class="tabs">
+                        <li v-on:click="description(false)" v-bind:class="{'active': enDescription === false}">ざつに</li>
+                        <li v-on:click="description(true)" v-bind:class="{'active': enDescription === true}">ちょっとくわしく
+                        </li>
+                    </ul>
+                </div>
+                <div class="tabfolder">
+                    <ul class="tabs">
+                        <li v-on:click="sorter_created('new')" v-bind:class="{'active': sort_created === 'new'}">あたらしいの
+                        </li>
+                        <li v-on:click="sorter_created('old')" v-bind:class="{'active': sort_created === 'old'}">ふるいの
+                        </li>
+                    </ul>
+                </div>
+                <h3 class="center maintext sstitle">げーむっぽいもの</h3>
+                <div v-if="enDescription">
+                    <div class="dworkbox">
+                        <div class="dwork" v-for="game in gamelist">
+                            <a :href="game.link">
+                                <img :src="'./resource/thumbnail/g'+game.no+'.png'">
+                            </a>
+                            <div class="dwork_d">
+                                <h2>{{game.title}}</h2>
+                                <p v-html="game.memo"></p>
+                                <p>ジャンル: {{game.genre}}　形式: {{game.form}}</p>
+                                <p>最終更新: {{game.date}}　主要技術: {{game.engine}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="!enDescription">
+                    <div class="workbox">
+                        <div class="work" v-for="game in gamelist">
+                            <a :href="game.link">
+                                <h2>{{game.title}}</h2>
+                                <img :src="'./resource/thumbnail/g'+game.no+'.png'">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="center maintext sstitle">ちょっとしたもの</h3>
+                <div v-if="enDescription">
+                    <div class="dworkbox">
+                        <div class="dwork" v-for="tool in toollist">
+                            <a :href="tool.link">
+                                <img :src="'./resource/thumbnail/t'+tool.no+'.png'">
+                            </a>
+                            <div class="dwork_d">
+                                <h2>{{tool.title}}</h2>
+                                <p v-html="tool.memo"></p>
+                                <p>ジャンル: {{tool.genre}}　形式: {{tool.form}}</p>
+                                <p>最終更新: {{tool.date}}　主要技術: {{tool.engine}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="!enDescription">
+                    <div class="workbox">
+                        <div class="work" v-for="tool in toollist">
+                            <a :href="tool.link">
+                                <h2>{{tool.title}}</h2>
+                                <img :src="'./resource/thumbnail/t'+tool.no+'.png'">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="activeTab === 'something'">
+                <div class="subtitle">
+                    <h2 class="subtitle_s">好きなもの</h2>
+                    <p class="center maintext">最低限の自己紹介代わりに好きなものを書いておきます。</p>
+                </div>
+                <h3 class="center maintext sstitle">ゲーム</h3>
+                <h4 class="center maintext">Control<br>DEATHLOOP<br>Noita<br>Teardown</h4>
+                <h3 class="center maintext sstitle">音楽</h3>
+                <h4 class="center maintext">RD-Sounds<br>La prière<br>ツユ</h4>
+                <h3 class="center maintext sstitle">SCP</h3>
+                <h4 class="center maintext">SCP-2718</h4>
+            </div>
+            <div v-if="activeTab === 'link'">
+                <div class="subtitle">
+                    <h2 class="subtitle_s">各種リンク</h2>
+                    <p class="center maintext"><ruby>
+                            <rb>別の場所<rp>（</rp>
+                                <rt>ここではないどこか</rt>
+                                <rp>）</rp>
+                            </rb>
+                        </ruby>へのリンクです。<br>どこかに書いとかないと忘れちゃいますからね</p>
+                </div>
+                <div class="linksbox">
+                    <div class="link" v-for="link in linklist">
+                        <a :href="link.link">
+                            <img :src="'./resource/icons/'+link.icon+'.png'">
+                        </a>
+                        <div class="link_desc">
+                            <h2>{{link.name}}</h2>
+                            <p>{{link.desc}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="activeTab === 'jam'">
+                <div class="subtitle">
+                    <h2 class="subtitle_s">ゲームジャム</h2>
+                    <p class="center maintext">いわしジャムというゲームジャムを個人的に運営していたりします。</p>
+                </div>
+                <div class="tabfolder">
+                    <ul class="tabs">
+                        <li v-on:click="sorter_jam('new')" v-bind:class="{'active': sort_jam === 'new'}">あたらしいの
+                        </li>
+                        <li v-on:click="sorter_jam('old')" v-bind:class="{'active': sort_jam === 'old'}">ふるいの
+                        </li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 1em;" class="center" v-for="jam in jamlist">
+                    <a :href="'https://itch.io/jam/iwashi-jam-'+jam.no">
+                        <h2>いわしジャム #{{jam.no}}</h2>
+                        <p>テーマ: {{jam.theme}}</p>
+                    </a>
+                </div>
+                <img class="center" style="display: block;margin: auto;" src="./resource/icons/iwashijam_trp.png">
+            </div>
+        </div>
+        <div class="footer center">
+            <small>&copy; 2022 たかかつ</small>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="./main.js" defer></script>
+</body>
+
+</html>
