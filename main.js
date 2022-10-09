@@ -13,6 +13,7 @@ const myData = {
 		{ no: 5, theme: "矩形" },
 		{ no: 6, theme: "明" },
 		{ no: 7, theme: "惑星" },
+		{ no: 8, theme: "装" },
 	],
 	linklist: [
 		{ icon: "itch", name: "itch.io", link: "https://takakatsu.itch.io/", desc: "ゲームを配布してる場所です。" },
@@ -129,6 +130,11 @@ const myData = {
 			no: 22, link: "https://takakatsu.itch.io/plantet",
 			title: "Plantet", engine: "Unity", date: "2022年8月28日", form: "browser", genre: "???",
 			memo: "GRO〇系ゲームっぽいものを作ろうとしてたっぽい<br>バリエーションが増やせなかった…"
+		},
+		{
+			no: 23, link: "https://takakatsu.itch.io/spinshot",
+			title: "SpinShot", engine: "TIC-80", date: "2022年10月9日", form: "browser", genre: "全方位STG",
+			memo: "所謂アステロイドみたいなもの。<br>新しいゲームエンジンを試してみたけど面白かった。"
 		},
 	],
 	toollist: [
