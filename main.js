@@ -136,6 +136,11 @@ const myData = {
 			title: "SpinShot", engine: "TIC-80", date: "2022年10月9日", form: "browser", genre: "全方位STG",
 			memo: "所謂アステロイドみたいなもの。<br>新しいゲームエンジンを試してみたけど面白かった。"
 		},
+		{
+			no: 24, link: "https://takakatsu.itch.io/q-qr",
+			title: "Q. QR", engine: "TIC-80", date: "2022年10月11日", form: "browser", genre: "苦行",
+			memo: "QRコードで作った苦行<br>もう少し規則性があると思ってたんですけどね()"
+		},
 	],
 	toollist: [
 		{
