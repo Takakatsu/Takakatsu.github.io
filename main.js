@@ -141,6 +141,11 @@ const myData = {
 			title: "Q. QR", engine: "TIC-80", date: "2022年10月11日", form: "browser", genre: "苦行",
 			memo: "QRコードで作った苦行<br>もう少し規則性があると思ってたんですけどね()"
 		},
+		{
+			no: 25, link: "https://takakatsu.itch.io/100dannmaku",
+			title: "100マス弾幕", engine: "TIC-80", date: "2022年10月29日", form: "browser", genre: "避けゲー",
+			memo: "100マス計算っぽいパターン化をしてみたかった"
+		},
 	],
 	toollist: [
 		{
