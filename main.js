@@ -146,6 +146,11 @@ const myData = {
 			title: "100マス弾幕", engine: "TIC-80", date: "2022年10月29日", form: "browser", genre: "避けゲー",
 			memo: "100マス計算っぽいパターン化をしてみたかった"
 		},
+		{
+			no: 26, link: "https://takakatsu.itch.io/a-device",
+			title: "a device", engine: "Siv3D", date: "2023年1月1日", form: "exe", genre: "シミュレーション",
+			memo: "初めてストーリー性を組み込んだゲーム<br>雰囲気全振りなのでゲーム性はそこまで無いかも<br>シェーダー書くの楽しかった"
+		},
 	],
 	toollist: [
 		{
